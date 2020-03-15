@@ -112,9 +112,9 @@
 
 				if (!pause_lerp) {
 					camPos.lerp(new THREE.Vector3(
-						targetPosition.x + (targetPosition.x > 0 ? 3 : - 3), 
-						targetPosition.y + 3, 
-						targetPosition.z + (targetPosition.z > 0 ? 3 : - 3)), 
+						targetPosition.x + (targetPosition.x > 0 ? 3 : - 3),
+						targetPosition.y + 3,
+						targetPosition.z + (targetPosition.z > 0 ? 3 : - 3)),
 						0.05);
 					camera.position.copy(camPos);
 				}
@@ -132,14 +132,27 @@
 			if (intersects.length > 0) {
 				if (INTERSECTED != intersects[0].object && intersects[0].object.name !== "Plane") {
 
-					if (INTERSECTED) INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
-
+					if (INTERSECTED) {
+						INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
+						console.log(INTERSECTED.currentHex);
+					}
 					INTERSECTED = intersects[0].object;
 					INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
 					INTERSECTED.material.color.setHex(0x123456);
 
 				}
+			} else {
+
+				if (INTERSECTED) {
+
+					INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
+					INTERSECTED = null;
+
+				}
+
 			}
+
+
 		}
 
 		function showAlert(message) {
