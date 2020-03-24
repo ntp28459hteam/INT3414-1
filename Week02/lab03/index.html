@@ -25,26 +25,22 @@
 		import {
 			AmbientLight,
 			Color,
-			CubeRefractionMapping,
 			DoubleSide, FrontSide, BackSide,
 			Float32BufferAttribute,
-			Mesh,
 			MeshPhysicalMaterial,
-			NearestFilter,
 			PerspectiveCamera,
 			PointLight,
 			RepeatWrapping,
-			RGBFormat,
 			Scene,
 			TextureLoader,
-			TorusKnotBufferGeometry,
 			WebGLRenderer,
 		} from "./node_modules/three/build/three.module.js";
 
-		import { GUI } from './node_modules/three/examples/jsm/libs/dat.gui.module.js';
-		import { OrbitControls } from './node_modules/three/examples/jsm/controls/OrbitControls.js';
-
-
+		import {GUI} from './node_modules/three/examples/jsm/libs/dat.gui.module.js';
+		import {OrbitControls} from './node_modules/three/examples/jsm/controls/OrbitControls.js';
+		import {GLTFLoader} from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+		import {DRACOLoader} from './node_modules/three/examples/jsm/loaders/DRACOLoader.js';
+		
 		var constants = {
 
 			side: {
@@ -188,7 +184,6 @@
 				material.needsUpdate = true;
 
 			};
-
 		}
 
 		function guiScene(gui, scene) {
@@ -275,7 +270,7 @@
 
 		lights[0].position.set(0, 200, 0);
 		lights[1].position.set(100, 200, 100);
-		lights[2].position.set(- 100, - 200, - 100);
+		lights[2].position.set(-100, -200, -100);
 
 		scene.add(lights[0]);
 		scene.add(lights[1]);
@@ -283,30 +278,53 @@
 
 		guiScene(gui, scene, camera);
 
-		var geometry = new TorusKnotBufferGeometry(10, 3, 100, 16);
-		geometry = geometry.toNonIndexed();
+		// create loader
+		var loader = new GLTFLoader();
+		var dracoLoader = new DRACOLoader();
+		dracoLoader.setDecoderPath('/examples/jsm/libs/draco/');
+		loader.setDRACOLoader(dracoLoader);
 
-		generateVertexColors(geometry);
+		var mesh = null;
+		var geometry = null;
 
-		var mesh = new Mesh(geometry);
-		var material = new MeshPhysicalMaterial({ color: 0x2194CE });
-		guiMaterial(gui, mesh, material, geometry);
-		guiMeshPhysicalMaterial(gui, mesh, material, geometry);
-		mesh.material = material;
-		scene.add(mesh);
-
-		var prevFog = false;
+		loader.load(
+				'./gltf/TorusKnotBufferMesh.gltf',
+				function (gltf) {
+					scene.add(gltf.scene);
+					gltf.scene.traverse(function (child) {
+						if (child.type == "Mesh") {
+							mesh = child;
+							geometry = mesh.geometry;
+							geometry = geometry.toNonIndexed();
+							generateVertexColors(geometry);
+							var material = new MeshPhysicalMaterial({color: 0x2194CE});
+							guiMaterial(gui, mesh, material, geometry);
+							guiMeshPhysicalMaterial(gui, mesh, material, geometry);
+							mesh.material = material;
+							scene.add(mesh);
+						}
+					});
+				},
+				function (xhr) {
+					console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+				},
+				function (error) {
+					console.log('An error happened, it is' + error);
+				}
+		);
 		var controls = new OrbitControls(camera, renderer.domElement);
 		controls.update();
 
 		var render = function () {
 
-				requestAnimationFrame(render);
-
+			requestAnimationFrame(render);
+			if (mesh) {
 				mesh.rotation.x += 0.005;
 				mesh.rotation.y += 0.005;
+			}
 
-				renderer.render(scene, camera);
+
+			renderer.render(scene, camera);
 
 		};
 
@@ -319,11 +337,6 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 
 		}, false);
-
 		render();
-
 	</script>
-
-
-
 </html>
