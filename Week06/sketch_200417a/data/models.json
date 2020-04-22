@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Pietà (Michelangelo)",
+      "obj_file": "pieta.obj",
+      "detail": "The Pietà là một tác phẩm điêu khắc thời Phục hưng của Michelangelo Buônarroti, nằm trong Nhà thờ Thánh Peter, Thành phố Vatican. Đây là tác phẩm đầu tiên trong số một số tác phẩm cùng chủ đề của nghệ sĩ. Bức tượng được ủy thác cho Đức Hồng Y Jean de Bilhères, người đại diện tại Rome."
+    },
+    {
+      "name": "Head of David",
+      "obj_file": "head-of-david.obj",
+      "detail": "Tượng David là một bức tượng do Michelangelo điêu khắc từ năm 1501 đến 1504, là một kiệt tác của nghệ thuật điêu khắc thời Phục Hưng và là một trong hai tác phẩm điêu khắc vĩ đại nhất của Michelangelo (cùng với Pietà). Riêng tượng David hầu như chắc chắn giữ danh hiệu bức tượng được công nhận nhất trong lịch sử nghệ thuật. Bức tượng này đã được xem như là một biểu tượng của vẻ đẹp con người trẻ trung và sức mạnh."
+    },
+    {
+      "name": "Moses",
+      "obj_file": "moses.obj",
+      "detail": "Moses (Ic. 1513 Gian1515) là một tác phẩm điêu khắc của nghệ sĩ Phục hưng cao cấp người Ý Michelangelo Buônarroti, được đặt trong nhà thờ San Pietro ở Vincoli ở Rome. Công trình được Giáo hoàng Julius II ủy nhiệm vào năm 1505 cho ngôi mộ của ông. Tác phẩm mô tả một Moses ngồi với sừng trên đầu. "
+    }
+  ]

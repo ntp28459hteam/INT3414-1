@@ -1,10 +1,21 @@
 import peasy.*;
 import processing.sound.*;
+import controlP5.*;
+
+class ShapeObject {
+    public PShape shade;
+    public String detail;
+    public String name;
+    public ShapeObject(String name, String detail) {
+        this.shade = null;
+        this.detail = detail;
+        this.name = name;
+
+    }
+}
 
 PeasyCam cam;
 SoundFile file;
-
-import controlP5.*;
 
 ControlP5 cp5;
 
@@ -20,34 +31,20 @@ float viewOff;
 PVector half = new PVector();
 PVector mouse = new PVector();
 
-PShape models[] = new PShape[0];
 PShape box;
+
+ShapeObject models[] = new ShapeObject[0];
+
 int currentIndex = 0;
-String textValue = "Đức Mẹ Sầu Bi (hoặc Pietà theo tiếng Ý) là một chủ đề trong nghệ thuật Kitô giáo, miêu tả Đức Mẹ Maria ôm xác Chúa Giêsu, và thường thể hiện bằng tác phẩm điêu khắc. Đây là cảnh tượng đặc trưng nhất trong bối cảnh hạ xác Chúa Giêsu xuống khỏi cây thập giá sau khi chịu đóng đinh.";
-Textarea myTextarea;
+
+Textarea detailTextarea;
 
 void setup() {
-    size(683, 384, P3D);
+    size(1000, 700, P3D);
 
-    file = new SoundFile(this, "Mountain Temple.mp3");
-    file.play();
+    //file = new SoundFile(this, "Land Me.mp3");
+    //file.play();
 
-
-    PShape pieta = loadShape("pieta.obj");
-    pieta.setFill(0xffffffff);
-    pieta.setSpecular(0xfffff7d5);
-    models = (PShape[]) append(models, pieta);
-
-
-    PShape head_of_david = loadShape("head-of-david.obj");
-    head_of_david.setFill(0xffffffff);
-    head_of_david.setSpecular(0xfffff7d5);
-    models = (PShape[]) append(models, head_of_david);
-
-    PShape moses = loadShape("moses.obj");
-    moses.setFill(0xffffffff);
-    moses.setSpecular(0xfffff7d5);
-    models = (PShape[]) append(models, moses);
 
     angle = QUARTER_PI;
     viewOff = height * .86602;
@@ -64,25 +61,36 @@ void setup() {
         .setBackgroundHeight(250)
         .setWidth(180)
         .setBackgroundColor(color(255, 50));
-    cp5.addButton("Pieta", 10, 10, 10, 160, 20).setId(0).setGroup(g1);
-    cp5.addButton("Head Of David", 4, 10, 40, 160, 20).setId(1).setGroup(g1);
-    cp5.addButton("Mose", 4, 10, 70, 160, 20).setId(2).setGroup(g1);
+
+    JSONArray values;
+
+    values = loadJSONArray("models.json");
+
+    for (int i = 0; i < values.size(); i++) {
+
+        JSONObject object = values.getJSONObject(i);
+        String detail = object.getString("detail");
+        String name = object.getString("name");
+        models = (ShapeObject[]) append(models, new ShapeObject(name, detail));
+        cp5.addButton(name).setPosition(10, 10 + 30 * i).setSize(160, 20).setId(i).setGroup(g1);
+
+    }
+    loadData(0);
     cp5.setAutoDraw(false);
-    ambientLight(51, 102, 126);
+    ambientLight(255, 255,255);
     Group g2 = cp5.addGroup("Thong tin hien vat")
-        .setPosition(470, 60)
+        .setPosition(770, 60)
         .setBackgroundHeight(250)
         .setWidth(200)
         .setBackgroundColor(color(255, 50));
-    myTextarea = cp5.addTextarea("txt")
+    detailTextarea = cp5.addTextarea("txt")
         .setPosition(5, 5)
         .setSize(190, 240)
         .setFont(createFont("arial", 12))
         .setLineHeight(14)
-        .setColor(color(128))
-
+        .setColor(color(255, 255, 255))
         .setGroup(g2);
-    myTextarea.setText(textValue);
+    detailTextarea.setText(models[0].detail);
 
     PFont font = createFont("calibri", 12);
     textFont(font);
@@ -106,34 +114,49 @@ void draw() {
         0, 0, viewOff,
         mouse.x, mouse.y, -1,
         angle, concentration);
+    
 
-    shape(models[currentIndex]);
-    models[currentIndex].rotateY(.01);
-
-    box.rotateY(.01);
+    shape(models[currentIndex].shade);
+    models[currentIndex].shade.rotateY(.01);
+    
+    translate(0, 500, 0);
+    scale(15, 15, 15);
+    shape(box);
+    
     concentration = map(cos(frameCount * .01), -1, 1, 12, 100);
     mouse.set(mouseX - half.x, mouseY - half.y, viewOff);
     mouse.normalize();
+    hint(DISABLE_DEPTH_TEST);
+    cam.beginHUD();
     gui();
+    cam.endHUD();
+    hint(ENABLE_DEPTH_TEST);
 
 }
 
 void gui() {
-
-    hint(DISABLE_DEPTH_TEST);
-    cam.beginHUD();
     if (keyPressed && key == ' ') {
-        myTextarea.scroll((float) mouseX / (float) width);
+        detailTextarea.scroll((float) mouseX / (float) width);
     }
     if (keyPressed && key == 'l') {
-        myTextarea.setLineHeight(mouseY);
+        detailTextarea.setLineHeight(mouseY);
     }
 
     cp5.draw();
-    cam.endHUD();
-    hint(ENABLE_DEPTH_TEST);
+
 }
 
 void controlEvent(ControlEvent theEvent) {
     currentIndex = theEvent.getController().getId();
+    loadData(currentIndex);
+    detailTextarea.setText(models[currentIndex].detail);
+
+}
+void loadData(int index) {
+    if (models[index].shade == null) {
+        PShape shape = loadShape("pieta.obj");
+        shape.setFill(0xffffffff);
+        shape.setSpecular(0xfffff7d5);
+        models[index].shade = shape;
+    }
 }
