@@ -6,10 +6,12 @@ class ShapeObject {
     public PShape shade;
     public String detail;
     public String name;
-    public ShapeObject(String name, String detail) {
+    public String obj_file;
+    public ShapeObject(String name, String detail, String obj_file) {
         this.shade = null;
         this.detail = detail;
         this.name = name;
+        this.obj_file = obj_file;
 
     }
 }
@@ -69,9 +71,12 @@ void setup() {
     for (int i = 0; i < values.size(); i++) {
 
         JSONObject object = values.getJSONObject(i);
+        
         String detail = object.getString("detail");
         String name = object.getString("name");
-        models = (ShapeObject[]) append(models, new ShapeObject(name, detail));
+        String obj_file = object.getString("obj_file");
+
+        models = (ShapeObject[]) append(models, new ShapeObject(name, detail,obj_file));
         cp5.addButton(name).setPosition(10, 10 + 30 * i).setSize(160, 20).setId(i).setGroup(g1);
 
     }
@@ -154,7 +159,7 @@ void controlEvent(ControlEvent theEvent) {
 }
 void loadData(int index) {
     if (models[index].shade == null) {
-        PShape shape = loadShape("pieta.obj");
+        PShape shape = loadShape(models[index].obj_file);
         shape.setFill(0xffffffff);
         shape.setSpecular(0xfffff7d5);
         models[index].shade = shape;
