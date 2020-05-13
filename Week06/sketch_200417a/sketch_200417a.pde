@@ -44,8 +44,8 @@ Textarea detailTextarea;
 void setup() {
     size(1000, 700, P3D);
 
-    //file = new SoundFile(this, "Land Me.mp3");
-    //file.play();
+    file = new SoundFile(this, "Mountain Temple.mp3");
+    file.play();
 
 
     angle = QUARTER_PI;
@@ -78,9 +78,9 @@ void setup() {
 
         models = (ShapeObject[]) append(models, new ShapeObject(name, detail,obj_file));
         cp5.addButton(name).setPosition(10, 10 + 30 * i).setSize(160, 20).setId(i).setGroup(g1);
+        loadData(i);
 
     }
-    loadData(0);
     cp5.setAutoDraw(false);
     ambientLight(255, 255,255);
     Group g2 = cp5.addGroup("Thong tin hien vat")
