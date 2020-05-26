@@ -1,0 +1,100 @@
+# Blender MTL File: 'Kitchen.blend'
+# Material Count: 9
+
+newmtl Chrome
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Concrete
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 2.000000 -s 10.000000 10.000000 10.000000 Kitchen\\materials\\concrete_floor_02_4k_jpg\\concrete_floor_02_Nor_4k.jpg
+refl -s 10.000000 10.000000 10.000000 Kitchen\\materials\\concrete_floor_02_4k_jpg\\concrete_floor_02_spec_4k.jpg
+
+newmtl Glass
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Plaster
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 2.000000 -s 10.000000 10.000000 10.000000 Kitchen\\materials\\white_plaster_03_4k_jpg\\white_plaster_03_nor_4k.jpg
+refl -s 10.000000 10.000000 10.000000 Kitchen\\materials\\white_plaster_03_4k_jpg\\white_plaster_03_rough_ao_4k.jpg
+
+newmtl WallPaint
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl bathroomfloorM
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl doorM
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl kitchenfloorM
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 2.000000 -s 8.000000 8.000000 8.000000 Kitchen\\materials\\marble_01_4k_jpg\\marble_01_nor_4k.jpg
+refl -s 8.000000 8.000000 8.000000 Kitchen\\materials\\marble_01_4k_jpg\\marble_01_spec_4k.jpg
+
+newmtl wooden_floor
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 2.000000 -s 6.000000 6.000000 6.000000 Kitchen\\materials\\brown_planks_05_4k_jpg\\brown_planks_05_nor_4k.jpg
+refl -s 6.000000 6.000000 6.000000 Kitchen\\materials\\brown_planks_05_4k_jpg\\brown_planks_05_rough_AO_4k.jpg
