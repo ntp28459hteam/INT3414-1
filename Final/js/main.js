@@ -69,7 +69,16 @@ var wallRough = textureLoader.load(
 		'./objs/Kitchen/materials/white_plaster_03_4k_jpg/white_plaster_03_rough_4k.jpg');
 var wallRoughAO = textureLoader.load(
 		'./objs/Kitchen/materials/white_plaster_03_4k_jpg/white_plaster_03_rough_ao_4k.jpg');
-
+var wall2Map = textureLoader.load(
+		'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_albedo.jpg');
+var wall2AO = textureLoader.load(
+	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_ao.jpg');
+var wall2Height = textureLoader.load(
+	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_height.jpg');
+var wall2Normal = textureLoader.load(
+	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_normal.jpg');
+var wall2Rough = textureLoader.load(
+	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_roughness.jpg');
 var wallMaterial = new THREE.MeshStandardMaterial({
 	aoMap: wallAO,
 	aoMapIntensity: 0.5,
@@ -98,9 +107,19 @@ var floorMaterial2 = new THREE.MeshStandardMaterial({
 	roughness: 0.1
 });
 var wallMaterial2 = new THREE.MeshStandardMaterial({
-	color: 0xffffff,
-	roughness: 0.0
+	map: wall2Map,
+	aoMap: wall2AO,
+	aoMapIntensity: 0.5,
+	// normalMap: wall2Normal,
+	// roughnessMap: wall2Rough,
+	// color: 0xffff00,
+	// roughness: 0.0
 });
+// var wallMaterial2 = new THREE.MeshStandardMaterial({
+// 	color: 0xffffff,
+// 	roughness: 0.0
+// });
+
 
 var path = "./objs/textures/cube/Park2/";
 var format = '.jpg';
@@ -165,6 +184,7 @@ var material_assets = {
 };
 
 var objLoader = new OBJLoader();
+console.log(wallMaterial2);
 objLoader.load(
 	'./objs/Kitchen.obj',
 	function (object) {
