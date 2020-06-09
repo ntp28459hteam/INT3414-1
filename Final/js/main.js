@@ -301,6 +301,8 @@ function onMouseUp(event) {
 
 			var distance = camera.position.clone().sub(objpos).normalize()
 			distance.y += 50;
+		} else {
+			return;
 		}
 	} else {
 		var objpos = obj.parent.position.clone()
