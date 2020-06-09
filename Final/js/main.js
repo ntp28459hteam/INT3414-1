@@ -103,7 +103,6 @@ var wall2Normal = textureLoader.load(
 	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_normal.jpg');
 var wall2Rough = textureLoader.load(
 	'./objs/Kitchen/materials/brick_medieval_1k_tif/TexturesCom_Brick_Medieval_1K_roughness.jpg');
-	'./objs/Kitchen/materials/white_plaster_03_4k_jpg/white_plaster_03_rough_ao_4k.jpg');
 
 var wallMaterial = new THREE.MeshStandardMaterial({
 	aoMap: wallAO,
@@ -314,22 +313,24 @@ function onMouseUp(event) {
 	if (intersects.length == 0) return
 
 	var obj = intersects[0].object;
+	var objpos = null;
+	var distance = null;
 
 	if (obj.name.includes('Floor')) {
 		if ((event.which && event.which == 3) || (event.button && event.button == 2)) {
 
-			var objpos = intersects[0].point;
+			objpos = intersects[0].point;
 
-			var distance = camera.position.clone().sub(objpos).normalize()
+			distance = camera.position.clone().sub(objpos).normalize()
 			distance.y += 50;
 		}
 	} else {
-		var objpos = obj.parent.position.clone()
+		objpos = obj.parent.position.clone()
 
 		gui.removeFolder('MeshPhysicalMaterial')
 		guiMeshPhysicalMaterial(gui, obj.material);
 
-		var distance = camera.position.clone().sub(objpos).normalize()
+		distance = camera.position.clone().sub(objpos).normalize()
 		if (obj.parent.name == "SOFA") {
 			distance.y += 38
 			distance.z += 27
