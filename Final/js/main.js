@@ -313,26 +313,25 @@ function onMouseUp(event) {
 	if (intersects.length == 0) return
 
 	var obj = intersects[0].object;
-	var objpos = null;
-	var distance = null;
 
 	if (obj.name.includes('Floor')) {
 		if ((event.which && event.which == 3) || (event.button && event.button == 2)) {
 
-			objpos = intersects[0].point;
+			var objpos = intersects[0].point;
 
-			distance = camera.position.clone().sub(objpos).normalize()
+			var distance = camera.position.clone().sub(objpos).normalize()
 			distance.y += 50;
 		} else {
 			return;
 		}
 	} else {
-		objpos = obj.parent.position.clone()
+		var objpos = obj.parent.position.clone()
 
 		gui.removeFolder('MeshPhysicalMaterial')
 		guiMeshPhysicalMaterial(gui, obj.material);
 
-		distance = camera.position.clone().sub(objpos).normalize()
+		var distance = camera.position.clone().sub(objpos).normalize()
+		console.log(distance);
 		if (obj.parent.name == "SOFA") {
 			distance.y += 38
 			distance.z += 27
